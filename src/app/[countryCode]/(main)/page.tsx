@@ -11,6 +11,7 @@ import Hero from '@/components/Hero'
 import ComboOffer from '@/components/ComboOffer'
 import ProductReel from "@/components/ProductReel"
 import CustomLink from "@/components/CustomLink"
+import Faq from "@/components/Faq"
 
 const getCollectionsWithProducts = cache(
   async (
@@ -82,6 +83,7 @@ const page = async ({ params: { countryCode } } : {params: { countryCode: string
       </div>
       
       <ComboOffer />
+      <Faq />
     </section>
   )
 }
