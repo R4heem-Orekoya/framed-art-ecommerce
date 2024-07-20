@@ -25,20 +25,23 @@ const Hit = ({ hit }: HitProps) => {
       >
          <div
             key={hit.id}
-            className="col-span-1 border flex flex-col p-3 rounded-lg"
+            className="border border-zinc-200/60 hover:bg-zinc-100 flex items-center gap-3 p-2 sm:p-3 rounded-lg"
             >
-            <div className="relative w-full aspect-[4/5]">
+            <div className="relative w-16 sm:w-24 aspect-square flex-shrink-0">
                <Image
                   src={hit.thumbnail as string}
                   fill
                   alt={hit.title}
-                  className="group object-cover rounded-md"
+                  className="group object-cover rounded-md border border-zinc-100"
                />
             </div>
             <div className="flex flex-col justify-between group">
-               <div className="flex flex-col">
-                  <p className="mt-3 font-medium" data-testid="search-result-title">
+               <div className="flex flex-col sm:gap-2">
+                  <p className="text-sm sm:text-xl font-semibold text-zinc-800" data-testid="search-result-title">
                      {hit.title}
+                  </p>
+                  <p className="text-[10px] sm:text-xs line-clamp-2 text-muted-foreground" data-testid="search-result-title">
+                     {hit.description}
                   </p>
                </div>
             </div>

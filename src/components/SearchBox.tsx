@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 
 import { X } from "lucide-react"
 import SearchBoxWrapper, { ControlledSearchBoxProps } from "./SearchBoxWrapper"
-import { Input } from "./ui/input"
+import { Button } from "./ui/button"
 
 const ControlledSearchBox = ({ inputRef, onChange, onReset, onSubmit, placeholder, value, ...props }: ControlledSearchBoxProps) => {
    const handleSubmit = (event: FormEvent) => {
@@ -34,8 +34,8 @@ const ControlledSearchBox = ({ inputRef, onChange, onReset, onSubmit, placeholde
    return (
       <div {...props} className="w-full">
          <form action="" noValidate onSubmit={handleSubmit} onReset={handleReset}>
-            <div className="flex items-center justify-between">
-               <Input
+            <div className="flex flex-1 flex-shrink items-center justify-between">
+               <input
                   ref={inputRef}
                   data-testid="search-input"
                   autoComplete="off"
@@ -43,19 +43,14 @@ const ControlledSearchBox = ({ inputRef, onChange, onReset, onSubmit, placeholde
                   autoCapitalize="off"
                   placeholder={placeholder}
                   spellCheck={false}
-                  type="search"
                   value={value}
                   onChange={onChange}
-                  className="txt-compact-large h-6 placeholder:text-ui-fg-on-color placeholder:transition-colors focus:outline-none flex-1 bg-transparent "
+                  className="h-4 sm:h-6 sm:ml-2 placeholder:transition-colors focus:outline-none flex-1 bg-transparent "
                />
                {value && (
-                  <button
-                  onClick={handleReset}
-                  type="button"
-                  className="items-center justify-center text-ui-fg-on-color focus:outline-none gap-x-2 px-2 txt-compact-large flex"
+                  <button onClick={handleReset} type="button"
                   >
-                  <X />
-                  Cancel
+                     <X className="w-5 h-5 text-muted-foreground hover:text-primary duration-300"/>
                   </button>
                )}
             </div>
