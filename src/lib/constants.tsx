@@ -1,6 +1,6 @@
 import React from "react"
 
-import { CreditCard, CreditCardIcon } from "lucide-react"
+import { CreditCard } from "lucide-react"
 
 /* Map of payment provider_id to their title and icon. Add in any payment providers you want to use. */
 export const paymentInfoMap: Record<
