@@ -30,8 +30,8 @@ const Hero = () => {
       <div className='flex flex-col sm:flex-row gap-4 mx-auto justify-center'>
         <CustomLink className={buttonVariants({
           className: "max-sm:text-xs"
-        })} href="/products">
-          Explore Collection
+        })} href="/collections">
+          Explore Collections
         </CustomLink>
         <CustomLink className={buttonVariants({
           variant: "outline",

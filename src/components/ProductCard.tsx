@@ -23,15 +23,17 @@ const ProductCard = async ({ product, region }: { product: ProductPreviewType, r
    
    
    return (
-      <CustomLink href={`/products/${product.handle}`} className="hover:opacity-80">
-         <div className="w-full aspect-[4/5] grid place-items-center border border-zinc-100 relative rounded-lg overflow-hidden">
-            <Image src={product.thumbnail as string} className="object-cover " alt={product.title} fill priority={false} sizes=""/>
-         </div>
-         <div className="mt-2 grid w-full">
-            <h4 className="text-sm text-zinc-700">{product.title}</h4>
-            <span className="text-lg font-medium text-zinc-900">{cheapestPrice && <PriceText price={cheapestPrice}/>}</span>
-         </div>
-      </CustomLink>
+      <li key={product.id}>
+         <CustomLink href={`/products/${product.handle}`} className="hover:opacity-80">
+            <div className="w-full aspect-[4/5] grid place-items-center border border-zinc-100 relative rounded-lg overflow-hidden">
+               <Image src={product.thumbnail as string} className="object-cover " alt={product.title} fill priority={false} sizes=""/>
+            </div>
+            <div className="mt-2 grid w-full">
+               <h4 className="text-sm text-zinc-700">{product.title}</h4>
+               <span className="text-lg font-medium text-zinc-900">{cheapestPrice && <PriceText price={cheapestPrice}/>}</span>
+            </div>
+         </CustomLink>
+      </li>
    )
 }
 

@@ -1,4 +1,4 @@
-import AllProducts from "@/components/AllProducts"
+import ProductsComp from "@/components/ProductsComp"
 import SortComponent from "@/components/SortComponent"
 import { Separator } from "@/components/ui/separator"
 import { SortOptions } from "@/types/global"
@@ -28,7 +28,7 @@ const page = ({ searchParams, params }: Params) => {
         <SortComponent sortBy={sortBy || "created_at"} />
       </div>
       
-      <AllProducts 
+      <ProductsComp 
         sortBy={sortBy}
         page={page}
         countryCode={params.countryCode}

@@ -1,7 +1,6 @@
-import { Product } from "@medusajs/medusa"
-import { Metadata } from "next"
 import { getCollectionsList, getProductsList, getRegion } from "@/data"
 import { ProductCollectionWithPreviews } from "@/types/global"
+import { Product } from "@medusajs/medusa"
 import { cache, Suspense } from "react"
 
 import SkeletonPlaceholder from '@/components/ProductSkeleton'
@@ -13,7 +12,7 @@ import ProductReel from "@/components/ProductReel"
 import CustomLink from "@/components/CustomLink"
 import Faq from "@/components/Faq"
 
-const getCollectionsWithProducts = cache(
+export const getCollectionsWithProducts = cache(
   async (
     countryCode: string
   ): Promise<ProductCollectionWithPreviews[] | null> => {
@@ -54,7 +53,6 @@ const getCollectionsWithProducts = cache(
   }
 )
 
-
 const page = async ({ params: { countryCode } } : {params: { countryCode: string }}) => {
   const collections = await getCollectionsWithProducts(countryCode)
   const region = await getRegion(countryCode)
@@ -69,15 +67,15 @@ const page = async ({ params: { countryCode } } : {params: { countryCode: string
         {
           collections && region ? 
           <Suspense fallback={<SkeletonPlaceholder limit={4}/>}>
-            <ProductReel products={collections[0].products} region={region}/>
+            <ProductReel products={collections[1].products.slice(0, 4)} region={region}/>
           </Suspense> :
           <SkeletonPlaceholder limit={4} className="mt-12 mb-8"/>
         }
         
-        <CustomLink href="/products" className={buttonVariants({
+        <CustomLink href="/collections" className={buttonVariants({
           className: "mx-auto mt-12 flex gap-1 group max-sm:text-xs"
         })}>
-          Explore collection
+          Explore collections
           <ArrowRight className='w-4 h-4 -rotate-45 group-hover:rotate-0 transition z-10'/>
         </CustomLink>
       </div>

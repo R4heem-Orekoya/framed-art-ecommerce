@@ -7,8 +7,10 @@ interface AllProductsProps {
    sortBy?: SortOptions
    page?: string
    countryCode: string
+   collectionId?: string
 }
-const AllProducts = ({ sortBy, page, countryCode } : AllProductsProps) => {
+
+const ProductsComp = ({ sortBy, page, countryCode, collectionId } : AllProductsProps) => {
    const pageNumber = page ? parseInt(page) : 1
    
    return (
@@ -18,10 +20,11 @@ const AllProducts = ({ sortBy, page, countryCode } : AllProductsProps) => {
                sortBy={sortBy || "created_at"}
                page={pageNumber}
                countryCode={countryCode}
+               collectionId={collectionId}
             />
         </Suspense>
       </div>
    )
 }
 
-export default AllProducts
+export default ProductsComp

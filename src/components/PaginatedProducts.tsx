@@ -21,7 +21,7 @@ interface PaginatedProductsProps {
    countryCode: string
 }
 
-const PaginatedProducts = async ({ sortBy, page, countryCode, productsIds } : PaginatedProductsProps) => {
+const PaginatedProducts = async ({ sortBy, page, countryCode, productsIds, collectionId } : PaginatedProductsProps) => {
    const region = await getRegion(countryCode)
    if (!region) {
       return null
@@ -33,6 +33,10 @@ const PaginatedProducts = async ({ sortBy, page, countryCode, productsIds } : Pa
    if (productsIds) {
       queryParams["id"] = productsIds
    }
+   
+   if (collectionId) {
+      queryParams["collection_id"] = [collectionId]
+   }
     
    const { response: { products, count } } = await getProductsListWithSort({ page, queryParams, sortBy, countryCode }) 
    const totalPages = Math.ceil(count / PRODUCT_LIMIT)
@@ -40,9 +44,7 @@ const PaginatedProducts = async ({ sortBy, page, countryCode, productsIds } : Pa
       <>
          <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {products.map((p) =>  (
-               <li key={p.id}>
-                  <ProductCard product={p} region={region} />
-               </li>
+               <ProductCard product={p} region={region} />
             ))}
          </ul>
          
