@@ -9,9 +9,9 @@ interface ProductReelProps {
 
 const ProductReel = ({ products, region }: ProductReelProps) => {
    return (
-      <ul className="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8">
+      <ul className="grid gap-8 sm:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8">
          {products.map((product) => (
-           <ProductCard product={product} region={region} key={product.id}/>
+           <ProductCard product={product} region={region} />
          ))}
       </ul>
    )

@@ -26,7 +26,7 @@ const AddressTab = async ({ customer }: { customer: Omit<Customer, "password_has
             </p>
          </div>
          
-         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+         <div className="mt-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
             <AddressDialog />
             {customer.shipping_addresses.map((address) => {
                return (

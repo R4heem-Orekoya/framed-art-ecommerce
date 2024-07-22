@@ -10,7 +10,7 @@ import { AddressFieldsValidator, TAddressFieldsValidator } from "@/lib/validator
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 import { addCustomerShippingAddress } from "@/actions/account-actions"
-import { Plus } from "lucide-react"
+import { Loader2, Plus } from "lucide-react"
 import { useState } from "react"
 
 const AddressDialog = () => {

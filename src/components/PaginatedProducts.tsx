@@ -2,6 +2,7 @@ import { getProductsListWithSort, getRegion } from "@/data"
 import { SortOptions } from "@/types/global"
 import ProductCard from "./ProductCard"
 import { Pagination } from "./Pagination"
+import ProductReel from "./ProductReel"
 
 const PRODUCT_LIMIT = 8
 
@@ -42,11 +43,7 @@ const PaginatedProducts = async ({ sortBy, page, countryCode, productsIds, colle
    const totalPages = Math.ceil(count / PRODUCT_LIMIT)
    return (
       <>
-         <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {products.map((p) =>  (
-               <ProductCard product={p} region={region} />
-            ))}
-         </ul>
+         <ProductReel products={products} region={region}/>
          
          {totalPages > 1 && <Pagination page={page} totalPages={totalPages}/>}
       </>
