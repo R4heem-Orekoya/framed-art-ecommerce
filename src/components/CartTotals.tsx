@@ -26,6 +26,14 @@ const CartTotals = ({ cart } : { cart: Omit<Cart, "refundable_amount" | "refunde
                <span className="text-sm text-zinc-700">Taxes</span>
                <span className="text-sm font-medium text-primary">{getAmount(cart.tax_total)}</span>
             </div>
+            {!!cart.discount_total && (
+               <div className="flex items-center justify-between">
+                  <span className="text-sm text-zinc-700">Discount</span>
+                  <span className="text-sm font-medium text-primary">
+                     - {getAmount(cart.discount_total)}
+                  </span>
+               </div>
+            )}
          </div>
          <Separator className="my-4 bg-zinc-100"/>
          <div className="flex justify-between items-center">

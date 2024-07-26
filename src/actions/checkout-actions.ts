@@ -21,31 +21,31 @@ export async function cartUpdate(data: StorePostCartsCartReq) {
 }
 
 export async function applyDiscount(code: string) {
-  const cartId = cookies().get("_medusa_cart_id")?.value
+   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) return "No cartId cookie found"
+   if (!cartId) return "No cartId cookie found"
 
-  try {
-    await updateCart(cartId, { discounts: [{ code }] }).then(() => {
-      revalidateTag("cart")
-    })
-  } catch (error: any) {
-    throw error
-  }
+   try {
+      await updateCart(cartId, { discounts: [{ code }] }).then(() => {
+         revalidateTag("cart")
+      })
+   } catch (error: any) {
+      throw error
+   }
 }
 
 export async function applyGiftCard(code: string) {
-  const cartId = cookies().get("_medusa_cart_id")?.value
+   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) return "No cartId cookie found"
+   if (!cartId) return "No cartId cookie found"
 
-  try {
-    await updateCart(cartId, { gift_cards: [{ code }] }).then(() => {
-      revalidateTag("cart")
-    })
-  } catch (error: any) {
-    throw error
-  }
+   try {
+      await updateCart(cartId, { gift_cards: [{ code }] }).then(() => {
+         revalidateTag("cart")
+      })
+   } catch (error: any) {
+      throw error
+   }
 }
 
 export async function removeDiscount(code: string) {

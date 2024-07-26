@@ -21,7 +21,7 @@ const Hero = () => {
         />
       </div>
       <Badge variant="outline" className="border-zinc-400/60 font-normal text-zinc-600">
-        Checkout with redoxx20 to get 20% discount
+        Checkout with redoxx10 to get 10% discount
       </Badge>
       <h1 className='text-3xl md:text-4xl lg:text-6xl font-bold max-w-2xl mx-auto mt-8'>Best framed-art collections</h1>
       <p className='sm:text-lg py-8 max-w-lg mx-auto text-muted-foreground'>
