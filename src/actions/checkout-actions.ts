@@ -8,16 +8,16 @@ import { redirect } from "next/navigation"
 import { addShippingMethod, completeCart, deleteDiscount, setPaymentSession, updateCart } from "@/data"
 
 export async function cartUpdate(data: StorePostCartsCartReq) {
-  const cartId = cookies().get("_medusa_cart_id")?.value
+   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) return "No cartId cookie found"
+   if (!cartId) return "No cartId cookie found"
 
-  try {
-    await updateCart(cartId, data)
-    revalidateTag("cart")
-  } catch (error: any) {
-    return error.toString()
-  }
+   try {
+      await updateCart(cartId, data)
+      revalidateTag("cart")
+   } catch (error: any) {
+      return error.toString()
+   }
 }
 
 export async function applyDiscount(code: string) {

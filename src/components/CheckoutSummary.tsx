@@ -19,7 +19,7 @@ const CheckoutSummary = async () => {
    }
    
    return (
-      <div className="col-span-1 md:col-span-2 py-12 md:pl-6 md:h-full md:sticky md:top">
+      <div className="col-span-1 md:col-span-2 py-12 md:pl-6 md:h-full md:sticky md:top-16">
          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-zinc-800">
             In your Cart
          </h2>

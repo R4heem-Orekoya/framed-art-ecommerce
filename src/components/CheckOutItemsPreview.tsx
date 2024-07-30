@@ -30,7 +30,7 @@ const CheckOutItemsPreview = ({ region, items }: CheckOutItemsPreviewProps) => {
                      return (
                         <div className="flex gap-4 items-center justify-between">
                            <div className="relative size-24 border border-zinc-100/50 rounded-md overflow-hidden">
-                              <Image src={item.thumbnail as string} fill className="object-cover" alt={item.title}/>
+                              <Image sizes="" src={item.thumbnail as string} fill className="object-cover" alt={item.title}/>
                            </div>
                            <div className="flex flex-col gap-1 flex-1">
                               <p className="sm:text-lg font-medium">{item.title}</p>

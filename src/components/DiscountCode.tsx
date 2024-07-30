@@ -35,13 +35,13 @@ const DiscountCode = ({ cart }: { cart : Omit<Cart, "refundable_amount" | "refun
    const [isDiscountCodeRemoving, setIsDiscountCodeRemoving] = useState(false)
    
    const removeGiftCardCode = async (code: string) => {
-      setIsDiscountCodeRemoving(true)
       await removeGiftCard(code, gift_cards)
-      setIsDiscountCodeRemoving(false)
    }
   
    const removeDiscountCode = async () => {
+      setIsDiscountCodeRemoving(true)
       await removeDiscount(discounts[0].code)
+      setIsDiscountCodeRemoving(false)
    }
    
    const [message, formAction] = useFormState(submitDiscountForm, null)

@@ -17,7 +17,7 @@ const Summary = ({ cart }: SummaryProps) => {
          <Separator className="my-4 bg-zinc-100"/>
          <CartTotals cart={cart}/>
          <Separator className="my-4 bg-zinc-100"/>
-         <CustomLink href="/checkout" className={buttonVariants({
+         <CustomLink href="/checkout?step=address" className={buttonVariants({
             className: "w-full flex items-center gap-2 group"
          })}>
             Continue to checkout
