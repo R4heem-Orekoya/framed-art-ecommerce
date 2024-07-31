@@ -39,12 +39,7 @@ const AddressSelect = ({ addresses, cart }: AddressSelectProps) => {
                "customer_id",
             ]) as AddressPayload,
          })
-      }else{
-         console.log("couldn't update cart addrress");
       }
-      console.log(savedAddress);
-      console.log(selectedAddress)
-      console.log(cart?.shipping_address);
    }
    
    return (
@@ -56,7 +51,7 @@ const AddressSelect = ({ addresses, cart }: AddressSelectProps) => {
                aria-expanded={open}
                className="flex justify-between"
             >
-               <p className="max-sm:text-xs text-left flex-1 bg-red-200">
+               <p className="max-sm:text-xs text-left flex-1">
                   {selectedAddress ? selectedAddress.address_1 : "Select address..."}
                </p>
                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -68,14 +63,22 @@ const AddressSelect = ({ addresses, cart }: AddressSelectProps) => {
                   <CommandGroup>
                      {addresses.map((address) => (
                         <CommandItem
-                           className="flex gap-2 items-center"
+                           className="flex gap-2 items-start"
                            value={address.address_1 as string}
                            key={address.id}
                            onSelect={() => {
                               handleSelect(address.id)
+                              setOpen(false)
                            }}
                         >
-                           {address.address_1}
+                           <div className="grid gap-2">
+                              <p className="font-medium text-primary">{`${address.first_name} ${address.last_name}`}</p>
+                              <div>
+                                 <span>{address.address_1}, </span>
+                                 <span>{address.province}, </span>
+                                 <span>{address.country_code?.toUpperCase()}</span>
+                              </div>
+                           </div>
                            <CheckIcon
                               className={cn(
                                  "ml-auto h-4 w-4",

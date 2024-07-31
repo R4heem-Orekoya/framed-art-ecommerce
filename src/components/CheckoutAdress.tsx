@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter, usePathname, useParams } from "next/navigation"
 import { Cart, Customer } from "@medusajs/medusa"
-import { useFormState } from "react-dom"
+import { useFormState, useFormStatus } from "react-dom"
 import compareAddresses from "@/lib/util/compare-addresses"
 import useToggleState from "@/lib/hooks/use-toggle-state"
 import { setAddresses } from "@/actions/checkout-actions"
@@ -41,16 +41,16 @@ const CheckOutAddress = ({ cart, customer }: CheckOutAddressProps) => {
 
    return (
       <div>
-         <div className="flex flex-row items-center justify-between mb-6">
+         <div className="flex items-center justify-between mb-6">
             <h2 
                className="flex items-center gap-2 text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800"
             >
                Shipping Address
-               {!isOpen && <CircleCheck className="text-muted-foreground mt-1"/>}
+               {!isOpen && <CircleCheck className="w-5 h-5 text-muted-foreground"/>}
             </h2>
             {!isOpen && cart?.shipping_address && (
                <Button
-                  variant="outline"
+                  variant="ghost"
                   onClick={handleEdit}
                   data-testid="edit-address-button"
                >
@@ -79,8 +79,8 @@ const CheckOutAddress = ({ cart, customer }: CheckOutAddressProps) => {
                      <BillingAddress cart={cart} countryCode={countryCode} />
                   </div>
                   )}
-                  <Button className="mt-6" data-testid="submit-address-button">Continue to delivery</Button>
-                  <p className="text-sm text-red-500 font-medium" data-testid="address-error-message" >{message}</p>
+                  <SubmitButton />
+                  <p className="text-sm text-red-500 font-medium" data-testid="address-error-message">{message}</p>
                </div>
             </form>
          ) : (
@@ -88,68 +88,68 @@ const CheckOutAddress = ({ cart, customer }: CheckOutAddressProps) => {
             <div className="text-small-regular">
                {cart && cart.shipping_address ? (
                <div className="flex items-start gap-x-8">
-                  <div className="flex items-start gap-x-1 w-full">
-                     <div className="flex flex-col w-1/3" data-testid="shipping-address-summary">
-                        <p className="txt-medium-plus text-ui-fg-base mb-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                     <div className="flex flex-col gap-1 col-span-1" data-testid="shipping-address-summary">
+                        <p className="text-lg font-medium mb-1">
                            Shipping Address
                         </p>
-                        <p className="txt-medium text-ui-fg-subtle">
+                        <p className="text-sm text-muted-foreground">
                            {cart.shipping_address.first_name}{" "}
                            {cart.shipping_address.last_name}
                         </p>
-                        <p className="txt-medium text-ui-fg-subtle">
+                        <p className="text-sm text-muted-foreground">
                            {cart.shipping_address.address_1}{" "}
                            {cart.shipping_address.address_2}
                         </p>
-                        <p className="txt-medium text-ui-fg-subtle">
+                        <p className="text-sm text-muted-foreground">
                            {cart.shipping_address.postal_code},{" "}
                            {cart.shipping_address.city}
                         </p>
-                        <p className="txt-medium text-ui-fg-subtle">
+                        <p className="text-sm text-muted-foreground">
                            {cart.shipping_address.country_code?.toUpperCase()}
                         </p>
                      </div>
 
-                     <div className="flex flex-col w-1/3 " data-testid="shipping-contact-summary">
-                        <p className="txt-medium-plus text-ui-fg-base mb-1">
+                     <div className="flex flex-col gap-1 col-span-1" data-testid="shipping-contact-summary">
+                        <p className="text-lg font-medium mb-1">
                            Contact
                         </p>
-                        <p className="txt-medium text-ui-fg-subtle">
+                        <p className="text-sm text-muted-foreground">
                            {cart.shipping_address.phone}
                         </p>
-                        <p className="txt-medium text-ui-fg-subtle">
+                        <p className="text-sm text-muted-foreground">
                            {cart.email}
                         </p>
                      </div>
 
-                     <div className="flex flex-col w-1/3" data-testid="billing-address-summary">
-                     <p className="txt-medium-plus text-ui-fg-base mb-1">
-                        Billing Address
-                     </p>
-
-                     {sameAsSBilling ? (
-                        <p className="txt-medium text-ui-fg-subtle">
-                           Billing- and delivery address are the same.
+                     <div className="flex flex-col gap-1 col-span-1" data-testid="billing-address-summary">
+                        <p className="text-lg font-medium mb-1">
+                           Billing Address
                         </p>
-                     ) : (
-                        <>
-                           <p className="txt-medium text-ui-fg-subtle">
-                              {cart.billing_address.first_name}{" "}
-                              {cart.billing_address.last_name}
+
+                        {sameAsSBilling ? (
+                           <p className="text-sm text-muted-foreground">
+                              Billing- and delivery address are the same.
                            </p>
-                           <p className="txt-medium text-ui-fg-subtle">
-                              {cart.billing_address.address_1}{" "}
-                              {cart.billing_address.address_2}
-                           </p>
-                           <p className="txt-medium text-ui-fg-subtle">
-                              {cart.billing_address.postal_code},{" "}
-                              {cart.billing_address.city}
-                           </p>
-                           <p className="txt-medium text-ui-fg-subtle">
-                              {cart.billing_address.country_code?.toUpperCase()}
-                           </p>
-                        </>
-                     )}
+                        ) : (
+                           <>
+                              <p className="text-sm text-muted-foreground">
+                                 {cart.billing_address.first_name}{" "}
+                                 {cart.billing_address.last_name}
+                              </p>
+                              <p className="text-sm text-muted-foreground">
+                                 {cart.billing_address.address_1}{" "}
+                                 {cart.billing_address.address_2}
+                              </p>
+                              <p className="text-sm text-muted-foreground">
+                                 {cart.billing_address.postal_code},{" "}
+                                 {cart.billing_address.city}
+                              </p>
+                              <p className="text-sm text-muted-foreground">
+                                 {cart.billing_address.country_code?.toUpperCase()}
+                              </p>
+                           </>
+                        )}
                      </div>
                   </div>
                </div>
@@ -161,8 +161,18 @@ const CheckOutAddress = ({ cart, customer }: CheckOutAddressProps) => {
             </div>
          </div>
          )}
-         <Separator className="mt-8" />
+         <Separator className="mt-8 bg-zinc-100" />
       </div>
+   )
+}
+
+const SubmitButton = () => {
+   const { pending } = useFormStatus()
+   return (
+      <Button disabled={pending} className="mt-6 flex items-center gap-2" data-testid="submit-address-button">
+         Continue to delivery
+         {pending && <Loader2 className="w-4 h-3/4 animate-spin"/>}
+      </Button>
    )
 }
 
