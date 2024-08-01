@@ -1,5 +1,5 @@
 import { enrichLineItems } from "@/actions/cart-actions"
-import CartItemWrapper from "@/components/CartItemWrapper"
+import CartItemWrapper from "@/components/wrappers/CartItemWrapper"
 import CustomLink from "@/components/CustomLink"
 import Summary from "@/components/Summary"
 import { Button, buttonVariants } from "@/components/ui/button"

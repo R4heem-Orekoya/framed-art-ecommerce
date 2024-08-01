@@ -8,9 +8,9 @@ import repeat from "@/lib/util/repeat"
 import { Star } from "lucide-react"
 import ProductActions from "./ProductActions"
 import { Suspense } from "react"
-import ProductActionsWrapper from "./ProductActionsWrapper"
 import ProductAccordion from "./ProductAccordion"
 import BreadCrumb from "./BreadCrumb"
+import ProductActionsWrapper from "./wrappers/ProductActionsWrapper"
 
 interface ProductDetailProps {
    product: PricedProduct

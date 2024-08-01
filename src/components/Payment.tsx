@@ -7,8 +7,14 @@ import { setPaymentMethod } from "@/actions/checkout-actions"
 import { cn } from "@/lib/utils"
 import { CircleCheck } from "lucide-react"
 import { Button } from "./ui/button"
+import { StripeContext } from "./wrappers/PaymentWrapper"
+import { StripeCardElementOptions } from "@stripe/stripe-js"
+import { RadioGroup } from "./ui/radio-group"
+import PaymentContainer from "./PaymentContainer"
+import { paymentInfoMap } from "@/lib/constants"
+import { CardElement } from "@stripe/react-stripe-js"
 
-const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_total"> | null}) => {
+const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_total"> | null }) => {
    const [isLoading, setIsLoading] = useState(false)
    const [error, setError] = useState<string | null>(null)
    const [cardBrand, setCardBrand] = useState<string | null>(null)
@@ -20,14 +26,37 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
  
    const isOpen = searchParams.get("step") === "payment"
    
+   const isStripe = cart?.payment_session?.provider_id === "stripe"
+   const stripeReady = useContext(StripeContext)
+   
+   
+   const paidByGiftcard = cart?.gift_cards && cart?.gift_cards?.length > 0 && cart?.total === 0
+   
    const paymentReady = (cart?.payment_session && cart?.shipping_methods.length !== 0)
+   
+   const useOptions: StripeCardElementOptions = useMemo(() => {
+      return {
+         style: {
+            base: {
+               fontFamily: "Raleway, sans-serif",
+               color: "#424270",
+               "::placeholder": {
+                  color: "rgb(107 114 128)",
+               },
+            },
+         },
+         classes: {
+            base: "bg-red-200 pt-3 pb-1 block w-full h-11 px-4 mt-0 border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover transition-all duration-300 ease-in-out",
+         },
+      }
+   }, [])
    
    const createQueryString = useCallback(
       (name: string, value: string) => {
-        const params = new URLSearchParams(searchParams)
-        params.set(name, value)
-  
-        return params.toString()
+         const params = new URLSearchParams(searchParams)
+         params.set(name, value)
+   
+         return params.toString()
       },
       [searchParams]
    )
@@ -48,7 +77,7 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
   
    const handleEdit = () => {
       router.push(pathname + "?" + createQueryString("step", "payment"), {
-      scroll: false,
+         scroll: false,
       })
    }
    
@@ -64,6 +93,7 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
       setError(null)
    }, [isOpen])
    
+   console.log(cart?.payment_session);
    
    return (
       <>
@@ -83,6 +113,49 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
                   Edit
                </Button>
             )}
+         </div>
+         
+         <div>
+            <div className={isOpen ? "block" : "hidden"}>
+               {!paidByGiftcard && cart?.payment_sessions?.length ? (
+                  <>
+                     <RadioGroup defaultValue={cart.payment_session?.provider_id || ""} className="grid gap-4">
+                        {cart.payment_sessions
+                           .sort((a, b) => {
+                              return a.provider_id > b.provider_id ? 1 : -1
+                           }).map((paymentSession) => (
+                              <PaymentContainer 
+                                 paymentInfoMap={paymentInfoMap}
+                                 paymentSession={paymentSession}
+                                 key={paymentSession.id}
+                                 handleChange={handleChange}
+                                 selectedPaymentOptionId={
+                                    cart.payment_session?.provider_id || null
+                                 }
+                              />
+                           ))
+                        }
+                     </RadioGroup>
+                     
+                     {stripeReady && (
+                        <div className="mt-5 transition-all duration-150 ease-in-out">
+                           <p>Enter your card details:</p>
+                           
+                           <CardElement
+                              options={useOptions as StripeCardElementOptions}
+                              onChange={(e) => {
+                                 setCardBrand(e.brand && e.brand.charAt(0).toUpperCase() + e.brand.slice(1))
+                                 setError(e.error?.message || null)
+                                 setCardComplete(e.complete)
+                              }}
+                           />
+                        </div>
+                     )}
+                  </>
+               ): (
+                  <div></div>
+               )}
+            </div>
          </div>
       </>
    )

@@ -1,20 +1,29 @@
 import React from "react"
 
 import { CreditCard } from "lucide-react"
+import PayPal from "@/components/icons/paypal";
 
 /* Map of payment provider_id to their title and icon. Add in any payment providers you want to use. */
 export const paymentInfoMap: Record<
   string,
   { title: string; icon: React.JSX.Element }
 > = {
-   paystack: {
-      title: "Bank card",
+    paystack: {
+      title: "Paystack",
       icon: <CreditCard />,
-   },
-   manual: {
+    },
+    stripe: {
+      title: "Stripe",
+      icon: <CreditCard />,
+    },
+    paypal: {
+      title: "PayPal",
+      icon: <PayPal />,
+    },
+    manual: {
       title: "Test payment",
       icon: <CreditCard />,
-   },
+    },
   // Add more payment providers here
 }
 

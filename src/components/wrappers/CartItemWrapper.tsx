@@ -1,6 +1,7 @@
 import { LineItem, Region } from "@medusajs/medusa"
-import CartSkeleton from "./CartSkeleton"
-import CartItem from "./CartItem"
+import CartItem from "../CartItem"
+import CartSkeleton from "../CartSkeleton"
+
 
 interface CartItemWrapperProps{
    items?: Omit<LineItem, "beforeInsert">[]

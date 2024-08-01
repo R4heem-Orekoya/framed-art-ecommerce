@@ -3,7 +3,7 @@ import { FormEvent } from "react"
 import { useRouter } from "next/navigation"
 
 import { X } from "lucide-react"
-import SearchBoxWrapper, { ControlledSearchBoxProps } from "./SearchBoxWrapper"
+import SearchBoxWrapper, { ControlledSearchBoxProps } from "./wrappers/SearchBoxWrapper"
 import { Button } from "./ui/button"
 
 const ControlledSearchBox = ({ inputRef, onChange, onReset, onSubmit, placeholder, value, ...props }: ControlledSearchBoxProps) => {

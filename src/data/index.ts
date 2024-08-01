@@ -152,17 +152,17 @@ import { cookies } from "next/headers"
      })
  }
  
- export async function createPaymentSessions(cartId: string) {
-   const headers = getMedusaHeaders(["cart"])
- 
-   return medusaClient.carts
-     .createPaymentSessions(cartId, headers)
-     .then(({ cart }) => cart)
-     .catch((err) => {
-       console.log(err)
-       return null
-     })
- }
+  export async function createPaymentSessions(cartId: string) {
+    const headers = getMedusaHeaders(["cart"])
+  
+    return medusaClient.carts
+      .createPaymentSessions(cartId, headers)
+      .then(({ cart }) => cart)
+      .catch((err) => {
+        console.log(err)
+        return null
+      })
+  }
  
  export async function setPaymentSession({
    cartId,

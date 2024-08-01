@@ -129,7 +129,7 @@ const CheckOutAddress = ({ cart, customer }: CheckOutAddressProps) => {
 
                         {sameAsSBilling ? (
                            <p className="text-sm text-muted-foreground">
-                              Billing- and delivery address are the same.
+                              Billing and delivery address are the same.
                            </p>
                         ) : (
                            <>

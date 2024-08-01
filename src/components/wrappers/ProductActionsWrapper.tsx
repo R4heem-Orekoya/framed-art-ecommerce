@@ -1,6 +1,6 @@
 import { Region } from "@medusajs/medusa"
-import ProductActions from "./ProductActions"
 import { retrievePricedProductById } from "@/data"
+import ProductActions from "../ProductActions"
 
 //Fetches real time pricing for a product and renders the product actions component
 
