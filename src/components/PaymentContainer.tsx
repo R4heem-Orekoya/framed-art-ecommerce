@@ -24,8 +24,7 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({ paymentSession, sel
             }
          )} 
          onClick={() => {
-            handleChange(paymentSession.id)
-            console.log(paymentSession);
+            handleChange(paymentSession.provider_id)
          }}
       >
          <div className="flex items-center justify-between">

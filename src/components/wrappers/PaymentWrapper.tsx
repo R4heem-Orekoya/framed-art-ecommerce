@@ -15,7 +15,7 @@ interface WrapperProps {
 export const StripeContext = createContext(false)
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_KEY
-const stripePromise = stripeKey ? loadStripe(stripeKey) : null
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY as string)
 
 const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
 
@@ -23,6 +23,9 @@ const Wrapper: React.FC<WrapperProps> = ({ cart, children }) => {
    const paymentSession = cart.payment_session as PaymentSession
 
    const isStripe = paymentSession?.provider_id?.includes("stripe")
+   
+   console.log(isStripe, paymentSession, stripePromise);
+   
 
    if (isStripe && paymentSession && stripePromise) {
       return (

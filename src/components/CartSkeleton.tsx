@@ -4,7 +4,7 @@ import repeat from "@/lib/util/repeat"
 
 const CartSkeleton = () => {
    return (
-      <ul className="md:flex-1 grid divide-y-[1px] divide-zinc-100">
+      <ul className="md:flex-1 grid divide-y-[1px] divide-zinc-100 max-w-4xl">
          {repeat(3).map((_, i) => (
             <li key={i} className={cn("py-4 sm:py-6 flex gap-4", { "border-t border-zinc-100": i === 0 })}>
                <Skeleton className="size-24 sm:size-40"/>

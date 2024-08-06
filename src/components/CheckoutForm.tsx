@@ -46,7 +46,7 @@ const CheckoutForm = async () => {
         <Delivery cart={cart} availableShippingMethods={availableShippingMethods}/>
       </div>
       <div>
-        <Payment cart={cart}/>
+        <Payment cart={cart} />
       </div>
     </div>
   )

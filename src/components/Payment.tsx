@@ -29,7 +29,6 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
    const isStripe = cart?.payment_session?.provider_id === "stripe"
    const stripeReady = useContext(StripeContext)
    
-   
    const paidByGiftcard = cart?.gift_cards && cart?.gift_cards?.length > 0 && cart?.total === 0
    
    const paymentReady = (cart?.payment_session && cart?.shipping_methods.length !== 0)
@@ -92,9 +91,7 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
       setIsLoading(false)
       setError(null)
    }, [isOpen])
-   
-   console.log(cart?.payment_session);
-   
+
    return (
       <>
          <div className="flex items-center justify-between mb-6">
@@ -119,7 +116,7 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
             <div className={isOpen ? "block" : "hidden"}>
                {!paidByGiftcard && cart?.payment_sessions?.length ? (
                   <>
-                     <RadioGroup defaultValue={cart.payment_session?.provider_id || ""} className="grid gap-4">
+                     <RadioGroup defaultValue={cart.payment_session?.provider_id} className="grid gap-4">
                         {cart.payment_sessions
                            .sort((a, b) => {
                               return a.provider_id > b.provider_id ? 1 : -1
@@ -137,7 +134,7 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
                         }
                      </RadioGroup>
                      
-                     {stripeReady && (
+                     {isStripe && stripeReady && (
                         <div className="mt-5 transition-all duration-150 ease-in-out">
                            <p>Enter your card details:</p>
                            
@@ -153,7 +150,7 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
                      )}
                   </>
                ): (
-                  <div></div>
+                  <div className="p-4 bg-red-200"></div>
                )}
             </div>
          </div>

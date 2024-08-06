@@ -200,7 +200,6 @@ const ShippingAdress = ({ customer, cart, checked, onChange, countryCode } : Shi
                name="same_as_billing"
                checked={checked}
                onClick={() => {
-                  console.log("hello");
                   onChange()
                }}
                data-testid="billing-address-checkbox"
