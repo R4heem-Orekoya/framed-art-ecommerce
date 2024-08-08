@@ -20,7 +20,7 @@ const Review = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_tot
    return (
       <>
          <div className="flex flex-row items-center justify-between mb-6">
-            <h2 className={cn("flex items-center gap-2 text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800", {
+            <h2 className={cn("pt-8 flex items-center gap-2 text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800", {
                "opacity-50 pointer-events-none select-none": !isOpen
             })}>
                Review
