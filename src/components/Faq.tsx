@@ -32,9 +32,9 @@ const Faq = () => {
                   </AccordionTrigger>
                   <AccordionContent className="sm:text-lg">
                      <p>
-                        We offer shipping to locations in Lagos mainland Nigeria for order above NGN300,000
+                        No, we do not offer free shipping as these poducts are fragile and need to be handled with absolute care during delivery.
                      </p>
-                     <p className="mt-2">For smaller orders shipping charges for your order will be calculated and displayed at checkout.</p>
+                     <p className="mt-2">Shipping charges for your order will be calculated and displayed at checkout.</p>
                   </AccordionContent>
                </AccordionItem>
                

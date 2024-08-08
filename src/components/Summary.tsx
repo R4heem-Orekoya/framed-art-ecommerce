@@ -15,7 +15,7 @@ const Summary = ({ cart }: SummaryProps) => {
       <div className="md:min-w-[350px] max-md:mt-8 p-6 rounded-lg bg-zinc-50 border border-zinc-100">
          <h3 className="text-lg sm:text-xl font-semibold text-primary">Summary</h3>
          <Separator className="my-4 bg-zinc-100"/>
-         <CartTotals cart={cart}/>
+         <CartTotals data={cart}/>
          <Separator className="my-4 bg-zinc-100"/>
          <CustomLink href="/checkout?step=address" className={buttonVariants({
             className: "w-full flex items-center gap-2 group"

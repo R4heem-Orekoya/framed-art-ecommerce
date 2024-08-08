@@ -31,7 +31,7 @@ const Review = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_tot
             <p className="txt-medium-plus text-ui-fg-base mb-1">
                Placing this order indicates your agreement to our
                <span><CustomLink className="underline" href="/shipping-policy"> shipping</CustomLink></span> and 
-               <span><CustomLink className="underline" href="/shipping-policy"> return</CustomLink></span> Policies. 
+               <span><CustomLink className="underline" href="/return-policy"> return</CustomLink></span> Policies. 
                Please review them before proceeding.
             </p>
             <div className="mt-6">

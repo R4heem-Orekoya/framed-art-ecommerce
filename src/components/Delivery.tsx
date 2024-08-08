@@ -59,7 +59,7 @@ const Delivery = ({ cart, availableShippingMethods }: DeliveryProps ) => {
    return (
       <>
          <div className="flex items-center justify-between mb-6">
-            <h2 className={cn("flex items-center gap-2 text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800", {
+            <h2 className={cn("mt-8 flex items-center gap-2 text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800", {
                "opacity-50 pointer-events-none select-none": !isOpen && cart.shipping_methods.length === 0,
             })}>
                Delivery

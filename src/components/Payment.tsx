@@ -97,7 +97,7 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
    return (
       <>
          <div className="flex items-center justify-between mb-6">
-            <h2 className={cn("flex items-center gap-2 text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800", {
+            <h2 className={cn("my-8 flex items-center gap-2 text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800", {
                "opacity-50 pointer-events-none select-none": !isOpen && !paymentReady
             })}>
                Payment

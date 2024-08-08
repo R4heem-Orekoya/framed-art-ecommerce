@@ -24,7 +24,7 @@ const CheckoutSummary = async () => {
             In your Cart
          </h2>
          <Separator className="my-4 opacity-50"/>
-         <CartTotals cart={cart}/>
+         <CartTotals data={cart}/>
          <Separator className="my-4 opacity-50"/>
          <ItemsPreview items={cart.items} region={cart.region} />
          <Separator className="my-4 opacity-50"/>
