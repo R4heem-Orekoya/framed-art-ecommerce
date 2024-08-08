@@ -6,6 +6,8 @@ import React from 'react'
 import CheckOutAddress from './CheckoutAdress'
 import Delivery from './Delivery'
 import Payment from './Payment'
+import Wrapper from './wrappers/PaymentWrapper'
+import Review from './Review'
 
 const CheckoutForm = async () => {
   const cartId = cookies().get("_medusa_cart_id")?.value
@@ -38,7 +40,7 @@ const CheckoutForm = async () => {
   const customer = await getCustomer()
   
   return (
-    <div className="col-span-1 md:col-span-3 py-12 md:pr-6 flex flex-col gap-8">
+    <>
       <div>
         <CheckOutAddress cart={cart} customer={customer}/>
       </div>
@@ -48,7 +50,10 @@ const CheckoutForm = async () => {
       <div>
         <Payment cart={cart} />
       </div>
-    </div>
+      <div>
+        <Review cart={cart}/>
+      </div>
+    </>
   )
 }
 

@@ -10,6 +10,12 @@ import { CartWithCheckoutStep } from "@/types/global"
 import { LineItem } from "@medusajs/medusa"
 import { cookies } from "next/headers"
 import { ArrowUpRight } from "lucide-react"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+   title: "Cart",
+   description: "View your cart",
+}
 
 const fetchCart = async () => {
    const cartId = cookies().get("_medusa_cart_id")?.value

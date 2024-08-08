@@ -43,7 +43,7 @@ const CheckOutAddress = ({ cart, customer }: CheckOutAddressProps) => {
       <div>
          <div className="flex items-center justify-between mb-6">
             <h2 
-               className="flex items-center gap-2 text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800"
+               className="flex items-center gap-2 text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800"
             >
                Shipping Address
                {!isOpen && <CircleCheck className="w-5 h-5 text-muted-foreground"/>}

@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Cart } from "@medusajs/medusa"
 import { setPaymentMethod } from "@/actions/checkout-actions"
 import { cn } from "@/lib/utils"
-import { CircleCheck } from "lucide-react"
+import { CircleCheck, CreditCard, Loader2 } from "lucide-react"
 import { Button } from "./ui/button"
 import { StripeContext } from "./wrappers/PaymentWrapper"
 import { StripeCardElementOptions } from "@stripe/stripe-js"
@@ -13,6 +13,8 @@ import { RadioGroup } from "./ui/radio-group"
 import PaymentContainer from "./PaymentContainer"
 import { paymentInfoMap } from "@/lib/constants"
 import { CardElement } from "@stripe/react-stripe-js"
+import { Label } from "./ui/label"
+import { Separator } from "./ui/separator"
 
 const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_total"> | null }) => {
    const [isLoading, setIsLoading] = useState(false)
@@ -37,7 +39,7 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
       return {
          style: {
             base: {
-               fontFamily: "Raleway, sans-serif",
+               fontFamily: "Inter, san-serif",
                color: "#424270",
                "::placeholder": {
                   color: "rgb(107 114 128)",
@@ -45,7 +47,7 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
             },
          },
          classes: {
-            base: "bg-red-200 pt-3 pb-1 block w-full h-11 px-4 mt-0 border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover transition-all duration-300 ease-in-out",
+            base: "pt-3 pb-1 block w-full h-11 px-4 mt-0 border border-[rgb(240,5.9%,90%)] rounded-md appearance-none focus:outline-none hover:border-zinc-800 transition-all duration-300 ease-in-out",
          },
       }
    }, [])
@@ -95,7 +97,7 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
    return (
       <>
          <div className="flex items-center justify-between mb-6">
-            <h2 className={cn("flex items-center gap-2 text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800", {
+            <h2 className={cn("flex items-center gap-2 text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800", {
                "opacity-50 pointer-events-none select-none": !isOpen && !paymentReady
             })}>
                Payment
@@ -135,8 +137,8 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
                      </RadioGroup>
                      
                      {isStripe && stripeReady && (
-                        <div className="mt-5 transition-all duration-150 ease-in-out">
-                           <p>Enter your card details:</p>
+                        <div className="mt-6 transition-all duration-150 ease-in-out">
+                           <Label className="pb-3 block">Enter your card details:</Label>
                            
                            <CardElement
                               options={useOptions as StripeCardElementOptions}
@@ -149,11 +151,78 @@ const Payment = ({ cart }: { cart: Omit<Cart, "refundable_amount" | "refunded_to
                         </div>
                      )}
                   </>
+               ): paidByGiftcard ? (
+                  <div>
+                     <p className="font-medium mb-1">
+                        Payment method
+                     </p>
+                     <p className="text-sm text-muted-foreground" data-testid="payment-method-summary">
+                        Gift card
+                     </p>
+                  </div>
                ): (
-                  <div className="p-4 bg-red-200"></div>
+                  <div className="flex flex-col items-center justify-center px-4 py-16">
+                     <Loader2 className="text-muted-foreground animate-spin"/>
+                  </div>
                )}
+               
+               {error && <p className="pt-2 text-red-500 text-medium">{error}</p>}
+               
+               <Button
+                  className="mt-6"
+                  onClick={handleSubmit}
+                  disabled={
+                     (isStripe && !cardComplete) ||
+                     (!cart?.payment_session && !paidByGiftcard) || isLoading
+                  }
+                  data-testid="submit-payment-button"
+               >
+                  Continue to review 
+                  {isLoading && <Loader2 className="w-4 h-4 ml-1 animate-spin"/>}
+               </Button>
+            </div>
+            
+            <div className={isOpen ? "hidden" : "block"}>
+               {cart && paymentReady && cart.payment_session ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                     <div>
+                        <p className="font-medium mb-1">
+                           Payment method
+                        </p>
+                        <p className="text-sm text-muted-foreground" data-testid="payment-method-summary">
+                           {paymentInfoMap[cart.payment_session.provider_id]?.title || cart.payment_session.provider_id}
+                        </p>
+                     </div>
+                     <div>
+                        <p className="font-medium mb-1">
+                           Payment details
+                        </p>
+                        <div className="flex gap-2 text-sm text-muted-foreground items-center" data-testid="payment-details-summary">
+                           <div>
+                              {paymentInfoMap[cart.payment_session.provider_id]?.icon || (
+                                 <CreditCard className="w-5 h-5 text-muted-foreground"/>
+                              )}
+                           </div>
+                           <p>
+                              {cart.payment_session.provider_id === "stripe" && cardBrand ? cardBrand : "Another step will appear"}
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               ) : paidByGiftcard ? (
+                  <div>
+                     <p className="font-medium mb-1">
+                        Payment method
+                     </p>
+                     <p className="text-sm text-muted-foreground" data-testid="payment-method-summary">
+                        Gift card
+                     </p>
+                  </div>
+               ) : null}
             </div>
          </div>
+         
+         <Separator className="bg-zinc-100 mt-8"/>
       </>
    )
 }

@@ -6,13 +6,15 @@ import Image from "next/image"
 import { X } from "lucide-react"
 import { formatAmount } from "@/lib/util/prices"
 import { RegionInfo } from "@/types/global"
+import { cn } from "@/lib/utils"
 
 interface CheckOutItemsPreviewProps {
    items?: Omit<LineItem, "beforeInsert">[] | null
    region?: Region
+   className?: string
 }
 
-const CheckOutItemsPreview = ({ region, items }: CheckOutItemsPreviewProps) => {
+const ItemsPreview = ({ region, items, className }: CheckOutItemsPreviewProps) => {
    const getAmount = (amount: number | null | undefined) => {
       return formatAmount({
         amount: amount || 0,
@@ -22,7 +24,7 @@ const CheckOutItemsPreview = ({ region, items }: CheckOutItemsPreviewProps) => {
    }
    return (
       <ScrollArea>
-         <div className="max-h-80 grid gap-2">
+         <div className={cn("max-h-80 grid gap-2", className)}>
             {items && region
                ? items.sort((a, b) => {
                      return a.created_at > b.created_at ? -1 : 1
@@ -51,4 +53,4 @@ const CheckOutItemsPreview = ({ region, items }: CheckOutItemsPreviewProps) => {
    )
 }
 
-export default CheckOutItemsPreview
+export default ItemsPreview

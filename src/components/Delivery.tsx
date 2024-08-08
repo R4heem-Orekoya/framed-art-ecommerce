@@ -59,7 +59,7 @@ const Delivery = ({ cart, availableShippingMethods }: DeliveryProps ) => {
    return (
       <>
          <div className="flex items-center justify-between mb-6">
-            <h2 className={cn("flex items-center gap-2 text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800", {
+            <h2 className={cn("flex items-center gap-2 text-xl md:text-2xl lg:text-3xl font-semibold text-zinc-800", {
                "opacity-50 pointer-events-none select-none": !isOpen && cart.shipping_methods.length === 0,
             })}>
                Delivery
@@ -134,7 +134,7 @@ const Delivery = ({ cart, availableShippingMethods }: DeliveryProps ) => {
             <>
                {cart && cart.shipping_methods.length > 0 && (
                   <div>
-                     <p className="font-medium">Method</p>
+                     <p className="font-medium mb-1">Method</p>
                      <p className="text-sm text-muted-foreground">
                         {cart.shipping_methods[0].shipping_option.name} (
                            {formatAmount({

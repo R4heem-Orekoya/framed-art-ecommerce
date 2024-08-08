@@ -2,8 +2,8 @@ import { cookies } from "next/headers"
 import { Separator } from "./ui/separator"
 import { getCart } from "@/data"
 import CartTotals from "./CartTotals"
-import CheckOutItemsPreview from "./CheckOutItemsPreview"
 import DiscountCode from "./DiscountCode"
+import ItemsPreview from "./ItemsPreview"
 
 const CheckoutSummary = async () => {
    const cartId = cookies().get("_medusa_cart_id")?.value
@@ -26,7 +26,7 @@ const CheckoutSummary = async () => {
          <Separator className="my-4 opacity-50"/>
          <CartTotals cart={cart}/>
          <Separator className="my-4 opacity-50"/>
-         <CheckOutItemsPreview items={cart.items} region={cart.region} />
+         <ItemsPreview items={cart.items} region={cart.region} />
          <Separator className="my-4 opacity-50"/>
          <DiscountCode cart={cart}/>
       </div>

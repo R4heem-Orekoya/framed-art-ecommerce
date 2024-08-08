@@ -11,6 +11,12 @@ import ComboOffer from '@/components/ComboOffer'
 import ProductReel from "@/components/ProductReel"
 import CustomLink from "@/components/CustomLink"
 import Faq from "@/components/Faq"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Framed Art",
+  description: "A world of creativity of our curated collections of framed-arts.",
+}
 
 export const getCollectionsWithProducts = cache(
   async (

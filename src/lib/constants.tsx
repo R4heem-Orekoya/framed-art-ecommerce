@@ -10,11 +10,11 @@ export const paymentInfoMap: Record<
 > = {
     paystack: {
       title: "Paystack",
-      icon: <CreditCard />,
+      icon: <CreditCard className="w-5 h-5 text-muted-foreground"/>,
     },
     stripe: {
       title: "Stripe",
-      icon: <DollarSign />,
+      icon: <DollarSign className="w-5 h-5 text-muted-foreground"/>,
     },
     paypal: {
       title: "PayPal",
@@ -22,7 +22,7 @@ export const paymentInfoMap: Record<
     },
     manual: {
       title: "Test payment",
-      icon: <CreditCard />,
+      icon: <CreditCard className="w-5 h-5 text-muted-foreground"/>,
     },
   // Add more payment providers here
 }
