@@ -1,11 +1,12 @@
 import { RefreshCcw, Tag, Timer, Truck } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion"
+import { cn } from "@/lib/utils"
 
-const Faq = () => {
+const Faq = ({ headingClassName } : { headingClassName?: string }) => {
    return (
       <section className="py-16">
          <div className="max-w-4xl mx-auto">
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold">
+            <h2 className={cn("text-xl md:text-2xl lg:text-3xl font-semibold", headingClassName)}>
                Frequently asked questions
             </h2>
             
