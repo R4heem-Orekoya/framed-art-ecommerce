@@ -11,8 +11,11 @@ import { logCustomerIn } from "@/actions/account-actions"
 import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
 import CustomLink from "./CustomLink"
+import { Checkbox } from "./ui/checkbox"
+import { useState } from "react"
 
 const LoginComponent = () => {
+   const [isPassShown, setIsPassShown] = useState(false)
    const router = useRouter()
    
    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<TLoginCredentials>({
@@ -57,8 +60,15 @@ const LoginComponent = () => {
                </div>
                <div className="flex flex-col gap-3">
                   <Label>Password</Label>
-                  <Input type="password" placeholder="yourverystrongpassword" {...register("password")}/>
+                  <Input type={isPassShown ? "text": "password"} placeholder="yourverystrongpassword" {...register("password")}/>
                   {errors.password && <span className="text-red-500 text-xs -mt-1">{errors.password.message}</span>}
+               </div>
+               
+               <div className="flex items-center gap-2">
+                  <Checkbox onClick={() => {
+                     setIsPassShown(!isPassShown)
+                  }} checked={isPassShown} id="show-password"/>
+                  <Label htmlFor="show-password" className="cursor-pointer text-sm">Show password</Label>
                </div>
                 
                <Button disabled={isSubmitting} className="disabled:opacity-90 disabled:cursor-not-allowed" type="submit">

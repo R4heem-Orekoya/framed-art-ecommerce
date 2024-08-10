@@ -1,5 +1,3 @@
-import { Plus } from "lucide-react"
-import { Dialog, DialogTrigger } from "./ui/dialog"
 import AddressDialog from "./AddressDialog"
 import { Customer } from "@medusajs/medusa"
 import { headers } from "next/headers"

@@ -31,7 +31,7 @@ const Navbar = async () => {
       <header className="w-screen sticky top-0 z-50 bg-white/30 backdrop-blur-md">
          <nav className="w-[min(1400px,90%)] mx-auto h-16 flex items-center justify-between">
             <Link href="/">
-               <Logo className="w-28"/>
+               <Logo className="w-28 max-sm:w-20"/>
             </Link>
             <div className="flex items-center gap-6 max-sm:gap-3">
                <UserAccountNav />

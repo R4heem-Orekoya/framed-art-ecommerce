@@ -3,14 +3,21 @@
 import { signOut } from "@/actions/account-actions"
 import { Button } from "./ui/button"
 import { ArrowRight } from "lucide-react"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 const LogoutButton = ({ countryCode }: { countryCode: string }) => {
+   const router = useRouter()
    return (
       <Button
          onClick={async () => {
-            await signOut(countryCode)
-            redirect("sign-in")
+            try {
+               await signOut(countryCode)
+               router.push(`/${countryCode}/sign-in`)
+               toast.success("Signed out successfully!")
+            } catch (error) {
+               toast.error("Something went wrong! Try again.")
+            }
          }}
          className="group">
          Logout

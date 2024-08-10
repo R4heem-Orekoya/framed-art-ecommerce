@@ -39,7 +39,7 @@ const page = async ({ params, searchParams }: Params) => {
                <h2 className="text-xl md:text-2xl text-muted-foreground">Search Results for:</h2>
                <p className="text-lg font-medium text-primary">{decodeURI(query)} ({ids.length})</p>
             </div>
-            <CustomLink className={buttonVariants({variant: "outline"})} href="/products">
+            <CustomLink className={buttonVariants({variant: "outline"})} href="/collections">
                Clear
             </CustomLink>
          </div>

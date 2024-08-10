@@ -34,6 +34,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
+    "lenis": "^1.1.9",
     "lodash": "^4.17.21",
     "lucide-react": "^0.379.0",
     "medusa-react": "^9.0.17",

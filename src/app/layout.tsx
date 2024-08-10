@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from 'sonner'
-
+import { ReactLenis } from '@/lib/lenis'
 
 export const metadata: Metadata = {
   title: "Framed Art ",
@@ -16,12 +16,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="overflow-x-hidden font-Poppins">
-        <main>
-          {children} 
-        </main>
-        <Toaster position="top-center" richColors style={{
-          fontFamily: "Raleway"
-        }}/>
+        <ReactLenis root>
+          <main>
+            {children} 
+          </main>
+          <Toaster position="top-center" richColors style={{
+            fontFamily: "Raleway"
+          }}/>
+        </ReactLenis>
       </body>
     </html>
   );

@@ -1,15 +1,15 @@
 import { Separator } from "@/components/ui/separator"
-import { getCollectionsWithProducts } from "../page"
 import { getRegion } from "@/data"
 import CollectionRail from "@/components/CollectionRail"
 import { Metadata } from "next"
+import { getCollectionsWithProducts } from "../page"
 
 export const metadata: Metadata = {
    title: "Collections",
    description: "Exclusive collections of framed arts.",
 }
 
-const page = async ({ params: { countryCode } } : {params: { countryCode: string }}) => {
+const page = async ({ params: { countryCode } } : { params: { countryCode: string }}) => {
    const collections = await getCollectionsWithProducts(countryCode)
    const region = await getRegion(countryCode)
    

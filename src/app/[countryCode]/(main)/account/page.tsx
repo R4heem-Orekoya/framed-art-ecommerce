@@ -1,5 +1,6 @@
 import AddressTab from "@/components/AddressTab"
 import LogoutButton from "@/components/LogoutButton"
+import OrdersTab from "@/components/OrdersTab"
 import ProfileTab from "@/components/ProfileTab"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { getCustomer, listRegions } from "@/data"
@@ -14,7 +15,6 @@ export const metadata: Metadata = {
 const page = async ({ params: { countryCode } } : {params: { countryCode: string }}) => {
   const customer = await getCustomer()
   const regions = await listRegions()
-  
   
   if(!customer || !regions) redirect("sign-in")
   
@@ -32,23 +32,24 @@ const page = async ({ params: { countryCode } } : {params: { countryCode: string
       </div>
       
       <Tabs defaultValue="profile" className="mt-8">
-        <div className="w-full">
+         <div className="w-full">
           <TabsList>
             <TabsTrigger value="profile">Profile</TabsTrigger>
             <TabsTrigger value="addresses">Addresses</TabsTrigger>
             <TabsTrigger value="orders">Orders</TabsTrigger>
           </TabsList>
-        </div>
-        
-        <TabsContent value="profile" className="mt-8">
-          <ProfileTab customer={customer}/>
-        </TabsContent>
-        <TabsContent value="addresses">
-          <AddressTab customer={customer}/>
-        </TabsContent>
-        <TabsContent value="orders" className="mt-8 max-w-2xl">Change your password here.</TabsContent>
+         </div>
+         
+         <TabsContent value="profile" className="mt-8">
+            <ProfileTab customer={customer}/>
+         </TabsContent>
+         <TabsContent value="addresses">
+            <AddressTab customer={customer}/>
+         </TabsContent>
+         <TabsContent value="orders" className="mt-8">
+            <OrdersTab />
+         </TabsContent>
       </Tabs>
-      
     </section>
   )
 }
